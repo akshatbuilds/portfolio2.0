@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="28" viewBox="0 0 120 28" fill="none">
+  <path d="M6 20L14 8l8 12" stroke="#0A0F0D" stroke-width="2"/>
+  <circle cx="14" cy="20" r="3" fill="#C4FF47"/>
+  <text x="32" y="18" font-family="Inter, Arial" font-size="14" font-weight="700" fill="#0A0F0D">VERTEX</text>
+</svg>
