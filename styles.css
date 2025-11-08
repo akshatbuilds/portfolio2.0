@@ -64,9 +64,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline
 .hamburger span { display: block; width: 18px; height: 2px; background: var(--text); }
 
 .mobile-menu { position: fixed; inset: 0; background: #fff; display: grid; place-items: center; }
-.mobile-menu-inner { display: grid; gap: 18px; text-align: center; }
+.mobile-menu-inner { display: flex; flex-direction: row; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center; }
 .mobile-link { font-size: 20px; }
-.mobile-cta { justify-self: center; }
+.mobile-cta { align-self: center; }
 
 /* Hero */
 .hero {
@@ -256,6 +256,42 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--green); outline
   .metrics-grid { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
   .hero-metrics-grid { grid-template-columns: 1fr; }
+}
+
+/* Global Fog Overlay */
+:root {
+  --fog-opacity: 0.08;
+  --fog-speed-1: 140s;
+  --fog-speed-2: 110s;
+  --fog-speed-3: 160s;
+  --fog-tilt-x: 0px;
+  --fog-tilt-y: 0px;
+}
+.fog-overlay { position: fixed; inset: 0; pointer-events: none; z-index: 200; }
+.fog-layer { position: absolute; inset: 0; opacity: var(--fog-opacity); mix-blend-mode: soft-light; will-change: transform; }
+.fog1 { animation: fogDrift1 var(--fog-speed-1) ease-in-out infinite; }
+.fog2 { animation: fogDrift2 var(--fog-speed-2) ease-in-out infinite; }
+.beams { opacity: 0.03; mix-blend-mode: screen; animation: fogDrift3 var(--fog-speed-3) linear infinite; }
+
+@keyframes fogDrift1 {
+  0% { transform: translate3d(calc(-4% + var(--fog-tilt-x)), calc(-2% + var(--fog-tilt-y)), 0); }
+  50% { transform: translate3d(calc(4% + var(--fog-tilt-x)), calc(2% + var(--fog-tilt-y)), 0); }
+  100% { transform: translate3d(calc(-4% + var(--fog-tilt-x)), calc(-2% + var(--fog-tilt-y)), 0); }
+}
+@keyframes fogDrift2 {
+  0% { transform: translate3d(calc(3% + var(--fog-tilt-x)), calc(-3% + var(--fog-tilt-y)), 0); }
+  50% { transform: translate3d(calc(-3% + var(--fog-tilt-x)), calc(3% + var(--fog-tilt-y)), 0); }
+  100% { transform: translate3d(calc(3% + var(--fog-tilt-x)), calc(-3% + var(--fog-tilt-y)), 0); }
+}
+@keyframes fogDrift3 {
+  0% { transform: translate3d(calc(-6% + var(--fog-tilt-x)), calc(0% + var(--fog-tilt-y)), 0); }
+  50% { transform: translate3d(calc(6% + var(--fog-tilt-x)), calc(0% + var(--fog-tilt-y)), 0); }
+  100% { transform: translate3d(calc(-6% + var(--fog-tilt-x)), calc(0% + var(--fog-tilt-y)), 0); }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fog1, .fog2, .beams { animation: none !important; }
 }
 /* Typography override: use Canava Grotesk globally */
 html, body {
